@@ -11,11 +11,60 @@
             "id": "77c90225087924b5",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "llm-wiki-pattern"
+            },
+            "group": "a2da53c46cb739b8"
+          }
+        ]
+      },
+      {
+        "id": "7530aa6c34f1530f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8de5d74acb208a1b",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md",
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 1,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [],
+                  "collapse-display": true,
+                  "showArrow": false,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": true,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 1.0199953831698256,
+                  "close": true
+                }
+              },
               "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
+              "title": "Graph of llm-wiki-pattern"
+            },
+            "group": "a2da53c46cb739b8"
           }
         ]
       }
@@ -90,6 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +149,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for llm-wiki-pattern"
             }
           },
           {
@@ -150,15 +200,17 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of llm-wiki-pattern"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -167,16 +219,24 @@
   "left-ribbon": {
     "hiddenItems": {
       "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "graph:Open graph view": false
     }
   },
-  "active": "77c90225087924b5",
+  "active": "8de5d74acb208a1b",
   "lastOpenFiles": [
+    "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md",
+    "graphify-out/wiki/RAG_vs_Wiki_Persistente.md",
+    "conhecimentos_tecnicos/ia/otimizacao_de_contexto/rag-vs-wiki.md",
+    "conhecimentos_tecnicos/ia/otimizacao_de_contexto/schema-de-wiki.md",
+    "graphify.md",
+    "graphify.md.tmp.129744.1776804713717",
+    "conhecimentos_tecnicos/otimizacao_de_contexto",
+    "conhecimentos_tecnicos",
     "raw/graphify-out/cache",
     "raw/graphify-out",
     "templates/pattern.md",
@@ -188,10 +248,6 @@
     "raw/otimizacao-de-contexto/graphify-out/graph.json",
     "raw/otimizacao-de-contexto/graphify-out/GRAPH_REPORT.md",
     "raw/otimizacao-de-contexto/graphify-out/cache/6ca3311862d1edd86c19bd41acc0978045b76ecbec610c4c0aa88cfbb0ab7e8b.json",
-    "raw/otimizacao-de-contexto/graphify-out/cache/c3a1de4f5db970b8843cad3ec0ca7ea91482bd3af0cafb74db81d044f82733f8.json",
-    "raw/otimizacao-de-contexto/graphify-out/cache/fe049f533cff0060f35888597d16c984056cfa4064887f405caa414e9fc96c0c.json",
-    "raw/otimizacao-de-contexto/graphify-out/cache/66bdf1e5bcc115130514ec0da5d8918aaa05fb6650665ed828877191565b4a2c.json",
-    "raw/otimizacao-de-contexto/graphify-out/cache/1eb884ce1744e4b5fb95b7c64da0f5ff41caac5cdc793faa48719878c437bee6.json",
     "CLAUDE.md",
     "wiki-exemplo/conceitos/relative-positional-encoding.md",
     "wiki-exemplo/conceitos/positional-encoding.md",
@@ -209,7 +265,6 @@
     "raw/otimizacao-de-contexto/04-ferramentas/busca-qmd.md",
     "raw/otimizacao-de-contexto/00-estrutura-completa.md",
     "raw/otimizacao-de-contexto/04-ferramentas/obsidian.md",
-    "raw/otimizacao-de-contexto/04-ferramentas/dataview.md",
-    "graphify/obsidian/Wiki.md"
+    "raw/otimizacao-de-contexto/04-ferramentas/dataview.md"
   ]
 }

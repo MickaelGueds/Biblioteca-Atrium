@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>graphify - graphify-out/graph.html</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; overflow: hidden; }
+  #graph { flex: 1; }
+  #sidebar { width: 280px; background: #1a1a2e; border-left: 1px solid #2a2a4e; display: flex; flex-direction: column; overflow: hidden; }
+  #search-wrap { padding: 12px; border-bottom: 1px solid #2a2a4e; }
+  #search { width: 100%; background: #0f0f1a; border: 1px solid #3a3a5e; color: #e0e0e0; padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
+  #search:focus { border-color: #4E79A7; }
+  #search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid #2a2a4e; display: none; }
+  .search-item { padding: 4px 6px; cursor: pointer; border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .search-item:hover { background: #2a2a4e; }
+  #info-panel { padding: 14px; border-bottom: 1px solid #2a2a4e; min-height: 140px; }
+  #info-panel h3 { font-size: 13px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #info-content { font-size: 13px; color: #ccc; line-height: 1.6; }
+  #info-content .field { margin-bottom: 5px; }
+  #info-content .field b { color: #e0e0e0; }
+  #info-content .empty { color: #555; font-style: italic; }
+  .neighbor-link { display: block; padding: 2px 6px; margin: 2px 0; border-radius: 3px; cursor: pointer; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid #333; }
+  .neighbor-link:hover { background: #2a2a4e; }
+  #neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
+  #legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
+  #legend-wrap h3 { font-size: 13px; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .legend-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; border-radius: 4px; font-size: 12px; }
+  .legend-item:hover { background: #2a2a4e; padding-left: 4px; }
+  .legend-item.dimmed { opacity: 0.35; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend-count { color: #666; font-size: 11px; }
+  #stats { padding: 10px 14px; border-top: 1px solid #2a2a4e; font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+<div id="graph"></div>
+<div id="sidebar">
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search nodes..." autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div id="info-panel">
+    <h3>Node Info</h3>
+    <div id="info-content"><span class="empty">Click a node to inspect it</span></div>
+  </div>
+  <div id="legend-wrap">
+    <h3>Communities</h3>
+    <div id="legend"></div>
+  </div>
+  <div id="stats">32 nodes &middot; 48 edges &middot; 5 communities</div>
+</div>
+<script>
+const RAW_NODES = [{"id": "file_llm_wiki_pattern", "label": "LLM como mantenedor de wiki pessoal", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "LLM como mantenedor de wiki pessoal", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 11}, {"id": "file_rag_vs_wiki", "label": "RAG vs Wiki persistente", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 23.6, "font": {"size": 12, "color": "#ffffff"}, "title": "RAG vs Wiki persistente", "community": 4, "community_name": "RAG vs Wiki Persistente", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/rag-vs-wiki.md", "file_type": "document", "degree": 5}, {"id": "file_schema_de_wiki", "label": "Schema do Wiki (CLAUDE.md / AGENTS.md)", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 20.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Schema do Wiki (CLAUDE.md / AGENTS.md)", "community": 3, "community_name": "Schema do Wiki (Convencoes para LLM)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/schema-de-wiki.md", "file_type": "document", "degree": 4}, {"id": "file_skill", "label": "Skill graphify-study", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 26.4, "font": {"size": 12, "color": "#ffffff"}, "title": "Skill graphify-study", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "skills/graphify-study/SKILL.md", "file_type": "document", "degree": 6}, {"id": "file_graphify", "label": "Graphify - Guia Basico", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 26.4, "font": {"size": 12, "color": "#ffffff"}, "title": "Graphify - Guia Basico", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 6}, {"id": "llm_wiki_pattern_wiki_persistente", "label": "Wiki persistente mantido por LLM", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 29.1, "font": {"size": 12, "color": "#ffffff"}, "title": "Wiki persistente mantido por LLM", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 7}, {"id": "llm_wiki_pattern_tres_camadas", "label": "Tres camadas: raw sources, wiki, schema", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Tres camadas: raw sources, wiki, schema", "community": 3, "community_name": "Schema do Wiki (Convencoes para LLM)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 2}, {"id": "llm_wiki_pattern_ingest_query_maintain", "label": "Loop Ingest-Query-Maintain", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.7, "font": {"size": 0, "color": "#ffffff"}, "title": "Loop Ingest-Query-Maintain", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 1}, {"id": "llm_wiki_pattern_divisao_humano_llm", "label": "Divisao de trabalho humano-LLM", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Divisao de trabalho humano-LLM", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 2}, {"id": "llm_wiki_pattern_bookkeeping_rationale", "label": "Por que funciona agora: LLM resolve bookkeeping", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 18.2, "font": {"size": 12, "color": "#ffffff"}, "title": "Por que funciona agora: LLM resolve bookkeeping", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 3}, {"id": "llm_wiki_pattern_log_md", "label": "log.md append-only", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.7, "font": {"size": 0, "color": "#ffffff"}, "title": "log.md append-only", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 1}, {"id": "llm_wiki_pattern_memex", "label": "Vannevar Bush Memex (1945)", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Vannevar Bush Memex (1945)", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 2}, {"id": "llm_wiki_pattern_obsidian_graph", "label": "Obsidian graph view como diagnostico", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Obsidian graph view como diagnostico", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 2}, {"id": "llm_wiki_pattern_karpathy", "label": "Andrej Karpathy (LLM Wiki gist)", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Andrej Karpathy (LLM Wiki gist)", "community": 2, "community_name": "Padrao LLM Wiki (Karpathy)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md", "file_type": "document", "degree": 2}, {"id": "rag_vs_wiki_rag", "label": "RAG (Retrieval Augmented Generation)", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 18.2, "font": {"size": 12, "color": "#ffffff"}, "title": "RAG (Retrieval Augmented Generation)", "community": 4, "community_name": "RAG vs Wiki Persistente", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/rag-vs-wiki.md", "file_type": "document", "degree": 3}, {"id": "rag_vs_wiki_custo_pensamento", "label": "Onde mora o custo do pensamento (query vs ingestao)", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Onde mora o custo do pensamento (query vs ingestao)", "community": 4, "community_name": "RAG vs Wiki Persistente", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/rag-vs-wiki.md", "file_type": "document", "degree": 2}, {"id": "rag_vs_wiki_stateful_vs_stateless", "label": "Stateful (wiki) vs Stateless (RAG)", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Stateful (wiki) vs Stateless (RAG)", "community": 4, "community_name": "RAG vs Wiki Persistente", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/rag-vs-wiki.md", "file_type": "document", "degree": 2}, {"id": "rag_vs_wiki_quando_usar", "label": "Quando usar cada abordagem", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 12.7, "font": {"size": 0, "color": "#ffffff"}, "title": "Quando usar cada abordagem", "community": 4, "community_name": "RAG vs Wiki Persistente", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/rag-vs-wiki.md", "file_type": "document", "degree": 1}, {"id": "schema_de_wiki_schema", "label": "Schema (CLAUDE.md / AGENTS.md)", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 20.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Schema (CLAUDE.md / AGENTS.md)", "community": 3, "community_name": "Schema do Wiki (Convencoes para LLM)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/schema-de-wiki.md", "file_type": "document", "degree": 4}, {"id": "schema_de_wiki_coevolucao", "label": "Co-evolucao do schema com o usuario", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 12.7, "font": {"size": 0, "color": "#ffffff"}, "title": "Co-evolucao do schema com o usuario", "community": 3, "community_name": "Schema do Wiki (Convencoes para LLM)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/schema-de-wiki.md", "file_type": "document", "degree": 1}, {"id": "schema_de_wiki_porque_sobre_oque", "label": "Explicar o porque e nao so o que", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Explicar o porque e nao so o que", "community": 3, "community_name": "Schema do Wiki (Convencoes para LLM)", "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/schema-de-wiki.md", "file_type": "document", "degree": 2}, {"id": "skill_metodo_feynman", "label": "Metodo Feynman", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 20.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Metodo Feynman", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "skills/graphify-study/SKILL.md", "file_type": "document", "degree": 4}, {"id": "skill_active_recall", "label": "Active recall (perguntas de revisao)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Active recall (perguntas de revisao)", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "skills/graphify-study/SKILL.md", "file_type": "document", "degree": 2}, {"id": "skill_notas_filhas", "label": "Notas filhas (decomposicao de conceitos)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Notas filhas (decomposicao de conceitos)", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "skills/graphify-study/SKILL.md", "file_type": "document", "degree": 2}, {"id": "skill_template_study_note", "label": "Template de study-note (frontmatter + secoes)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Template de study-note (frontmatter + secoes)", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "skills/graphify-study/SKILL.md", "file_type": "document", "degree": 2}, {"id": "skill_conectar_arquivar", "label": "Conectar ao inves de arquivar", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 18.2, "font": {"size": 12, "color": "#ffffff"}, "title": "Conectar ao inves de arquivar", "community": 1, "community_name": "Skill Graphify-Study (Feynman + Notas)", "source_file": "skills/graphify-study/SKILL.md", "file_type": "document", "degree": 3}, {"id": "graphify_pipeline", "label": "Pipeline do graphify (detect-extract-build-analyze-export)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 20.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Pipeline do graphify (detect-extract-build-analyze-export)", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 4}, {"id": "graphify_god_nodes", "label": "God nodes (notas centrais)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "God nodes (notas centrais)", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 2}, {"id": "graphify_comunidades_louvain", "label": "Comunidades tematicas (Louvain)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Comunidades tematicas (Louvain)", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 2}, {"id": "graphify_arestas_extracted_inferred", "label": "Arestas EXTRACTED / INFERRED / AMBIGUOUS", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 18.2, "font": {"size": 12, "color": "#ffffff"}, "title": "Arestas EXTRACTED / INFERRED / AMBIGUOUS", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 3}, {"id": "graphify_wiki_index", "label": "Wiki navegavel (wiki/index.md)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 15.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Wiki navegavel (wiki/index.md)", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 2}, {"id": "graphify_graph_report", "label": "GRAPH_REPORT.md", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.7, "font": {"size": 0, "color": "#ffffff"}, "title": "GRAPH_REPORT.md", "community": 0, "community_name": "Graphify Pipeline e Outputs", "source_file": "graphify.md", "file_type": "document", "degree": 1}];
+const RAW_EDGES = [{"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_wiki_persistente", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_tres_camadas", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_ingest_query_maintain", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_divisao_humano_llm", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_bookkeeping_rationale", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_log_md", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_memex", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_obsidian_graph", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "llm_wiki_pattern_karpathy", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "file_rag_vs_wiki", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_llm_wiki_pattern", "to": "file_schema_de_wiki", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_rag_vs_wiki", "to": "rag_vs_wiki_rag", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_rag_vs_wiki", "to": "rag_vs_wiki_custo_pensamento", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_rag_vs_wiki", "to": "rag_vs_wiki_stateful_vs_stateless", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_rag_vs_wiki", "to": "rag_vs_wiki_quando_usar", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_schema_de_wiki", "to": "schema_de_wiki_schema", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_schema_de_wiki", "to": "schema_de_wiki_coevolucao", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_schema_de_wiki", "to": "schema_de_wiki_porque_sobre_oque", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_skill", "to": "skill_metodo_feynman", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_skill", "to": "skill_active_recall", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_skill", "to": "skill_notas_filhas", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_skill", "to": "skill_template_study_note", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_skill", "to": "skill_conectar_arquivar", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_skill", "to": "schema_de_wiki_schema", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "file_graphify", "to": "graphify_pipeline", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_graphify", "to": "graphify_god_nodes", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_graphify", "to": "graphify_comunidades_louvain", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_graphify", "to": "graphify_arestas_extracted_inferred", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_graphify", "to": "graphify_wiki_index", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "file_graphify", "to": "graphify_graph_report", "label": "defined_in", "title": "defined_in [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "llm_wiki_pattern_wiki_persistente", "to": "llm_wiki_pattern_bookkeeping_rationale", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "llm_wiki_pattern_wiki_persistente", "to": "rag_vs_wiki_rag", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "llm_wiki_pattern_wiki_persistente", "to": "llm_wiki_pattern_memex", "label": "cites", "title": "cites [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "llm_wiki_pattern_wiki_persistente", "to": "llm_wiki_pattern_karpathy", "label": "cites", "title": "cites [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "llm_wiki_pattern_wiki_persistente", "to": "graphify_wiki_index", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "llm_wiki_pattern_wiki_persistente", "to": "skill_conectar_arquivar", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "llm_wiki_pattern_tres_camadas", "to": "schema_de_wiki_schema", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "llm_wiki_pattern_divisao_humano_llm", "to": "skill_metodo_feynman", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "llm_wiki_pattern_bookkeeping_rationale", "to": "rag_vs_wiki_stateful_vs_stateless", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "llm_wiki_pattern_obsidian_graph", "to": "graphify_arestas_extracted_inferred", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "rag_vs_wiki_rag", "to": "rag_vs_wiki_custo_pensamento", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "schema_de_wiki_schema", "to": "schema_de_wiki_porque_sobre_oque", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "skill_metodo_feynman", "to": "skill_active_recall", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "skill_metodo_feynman", "to": "skill_template_study_note", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "skill_notas_filhas", "to": "skill_conectar_arquivar", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "graphify_pipeline", "to": "graphify_comunidades_louvain", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "graphify_pipeline", "to": "graphify_god_nodes", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "graphify_pipeline", "to": "graphify_arestas_extracted_inferred", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}];
+const LEGEND = [{"cid": 0, "color": "#4E79A7", "label": "Graphify Pipeline e Outputs", "count": 8}, {"cid": 1, "color": "#F28E2B", "label": "Skill Graphify-Study (Feynman + Notas)", "count": 7}, {"cid": 2, "color": "#E15759", "label": "Padrao LLM Wiki (Karpathy)", "count": 7}, {"cid": 3, "color": "#76B7B2", "label": "Schema do Wiki (Convencoes para LLM)", "count": 5}, {"cid": 4, "color": "#59A14F", "label": "RAG vs Wiki Persistente", "count": 5}];
+
+// HTML-escape helper — prevents XSS when injecting graph data into innerHTML
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Build vis datasets
+const nodesDS = new vis.DataSet(RAW_NODES.map(n => ({
+  id: n.id, label: n.label, color: n.color, size: n.size,
+  font: n.font, title: n.title,
+  _community: n.community, _community_name: n.community_name,
+  _source_file: n.source_file, _file_type: n.file_type, _degree: n.degree,
+})));
+
+const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({
+  id: i, from: e.from, to: e.to,
+  label: '',
+  title: e.title,
+  dashes: e.dashes,
+  width: e.width,
+  color: e.color,
+  arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+})));
+
+const container = document.getElementById('graph');
+const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
+  physics: {
+    enabled: true,
+    solver: 'forceAtlas2Based',
+    forceAtlas2Based: {
+      gravitationalConstant: -60,
+      centralGravity: 0.005,
+      springLength: 120,
+      springConstant: 0.08,
+      damping: 0.4,
+      avoidOverlap: 0.8,
+    },
+    stabilization: { iterations: 200, fit: true },
+  },
+  interaction: {
+    hover: true,
+    tooltipDelay: 100,
+    hideEdgesOnDrag: true,
+    navigationButtons: false,
+    keyboard: false,
+  },
+  nodes: { shape: 'dot', borderWidth: 1.5 },
+  edges: { smooth: { type: 'continuous', roundness: 0.2 }, selectionWidth: 3 },
+});
+
+network.once('stabilizationIterationsDone', () => {
+  network.setOptions({ physics: { enabled: false } });
+});
+
+function showInfo(nodeId) {
+  const n = nodesDS.get(nodeId);
+  if (!n) return;
+  const neighborIds = network.getConnectedNodes(nodeId);
+  const neighborItems = neighborIds.map(nid => {
+    const nb = nodesDS.get(nid);
+    const color = nb ? nb.color.background : '#555';
+    return `<span class="neighbor-link" style="border-left-color:${esc(color)}" onclick="focusNode(${JSON.stringify(nid)})">${esc(nb ? nb.label : nid)}</span>`;
+  }).join('');
+  document.getElementById('info-content').innerHTML = `
+    <div class="field"><b>${esc(n.label)}</b></div>
+    <div class="field">Type: ${esc(n._file_type || 'unknown')}</div>
+    <div class="field">Community: ${esc(n._community_name)}</div>
+    <div class="field">Source: ${esc(n._source_file || '-')}</div>
+    <div class="field">Degree: ${n._degree}</div>
+    ${neighborIds.length ? `<div class="field" style="margin-top:8px;color:#aaa;font-size:11px">Neighbors (${neighborIds.length})</div><div id="neighbors-list">${neighborItems}</div>` : ''}
+  `;
+}
+
+function focusNode(nodeId) {
+  network.focus(nodeId, { scale: 1.4, animation: true });
+  network.selectNodes([nodeId]);
+  showInfo(nodeId);
+}
+
+// Track hovered node — hover detection is more reliable than click params
+let hoveredNodeId = null;
+network.on('hoverNode', params => {
+  hoveredNodeId = params.node;
+  container.style.cursor = 'pointer';
+});
+network.on('blurNode', () => {
+  hoveredNodeId = null;
+  container.style.cursor = 'default';
+});
+container.addEventListener('click', () => {
+  if (hoveredNodeId !== null) {
+    showInfo(hoveredNodeId);
+    network.selectNodes([hoveredNodeId]);
+  }
+});
+network.on('click', params => {
+  if (params.nodes.length > 0) {
+    showInfo(params.nodes[0]);
+  } else if (hoveredNodeId === null) {
+    document.getElementById('info-content').innerHTML = '<span class="empty">Click a node to inspect it</span>';
+  }
+});
+
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const matches = RAW_NODES.filter(n => n.label.toLowerCase().includes(q)).slice(0, 20);
+  if (!matches.length) { searchResults.style.display = 'none'; return; }
+  searchResults.style.display = 'block';
+  matches.forEach(n => {
+    const el = document.createElement('div');
+    el.className = 'search-item';
+    el.textContent = n.label;
+    el.style.borderLeft = `3px solid ${n.color.background}`;
+    el.style.paddingLeft = '8px';
+    el.onclick = () => {
+      network.focus(n.id, { scale: 1.5, animation: true });
+      network.selectNodes([n.id]);
+      showInfo(n.id);
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+    };
+    searchResults.appendChild(el);
+  });
+});
+document.addEventListener('click', e => {
+  if (!searchResults.contains(e.target) && e.target !== searchInput)
+    searchResults.style.display = 'none';
+});
+
+const hiddenCommunities = new Set();
+const legendEl = document.getElementById('legend');
+LEGEND.forEach(c => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>
+    <span class="legend-label">${c.label}</span>
+    <span class="legend-count">${c.count}</span>`;
+  item.onclick = () => {
+    if (hiddenCommunities.has(c.cid)) {
+      hiddenCommunities.delete(c.cid);
+      item.classList.remove('dimmed');
+    } else {
+      hiddenCommunities.add(c.cid);
+      item.classList.add('dimmed');
+    }
+    const updates = RAW_NODES
+      .filter(n => n.community === c.cid)
+      .map(n => ({ id: n.id, hidden: hiddenCommunities.has(c.cid) }));
+    nodesDS.update(updates);
+  };
+  legendEl.appendChild(item);
+});
+</script>
+<script>
+// Render hyperedges as shaded regions
+const hyperedges = [{"nodes": ["llm_wiki_pattern_tres_camadas", "llm_wiki_pattern_ingest_query_maintain", "schema_de_wiki_schema"], "relation": "wiki_pattern_core", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "conhecimentos_tecnicos/ia/otimizacao_de_contexto/llm-wiki-pattern.md"}, {"nodes": ["skill_metodo_feynman", "skill_notas_filhas", "skill_active_recall", "skill_template_study_note"], "relation": "feynman_study_flow", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "skills/graphify-study/SKILL.md"}, {"nodes": ["graphify_pipeline", "graphify_god_nodes", "graphify_comunidades_louvain", "graphify_graph_report"], "relation": "graphify_analysis_output", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "graphify.md"}];
+// afterDrawing passes ctx already transformed to network coordinate space.
+// Draw node positions raw — no manual pan/zoom/DPR math needed.
+network.on('afterDrawing', function(ctx) {
+    hyperedges.forEach(h => {
+        const positions = h.nodes
+            .map(nid => network.getPositions([nid])[nid])
+            .filter(p => p !== undefined);
+        if (positions.length < 2) return;
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.fillStyle = '#6366f1';
+        ctx.strokeStyle = '#6366f1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Centroid and expanded hull in network coordinates
+        const cx = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+        const cy = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+        const expanded = positions.map(p => ({
+            x: cx + (p.x - cx) * 1.15,
+            y: cy + (p.y - cy) * 1.15
+        }));
+        ctx.moveTo(expanded[0].x, expanded[0].y);
+        expanded.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 0.4;
+        ctx.stroke();
+        // Label
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = '#4f46e5';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(h.label, cx, cy - 5);
+        ctx.restore();
+    });
+});
+</script>
+</body>
+</html>
