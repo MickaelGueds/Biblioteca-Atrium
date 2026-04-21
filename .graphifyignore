@@ -1,0 +1,46 @@
+# .graphifyignore
+# Ignore arquivos e pastas que não devem entrar no grafo
+
+# Dependências
+node_modules/
+vendor/
+bower_components/
+
+# Build
+dist/
+build/
+out/
+target/
+
+# Temp e cache
+*.tmp
+*.temp
+.cache/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gerados
+*.generated.py
+*.generated.js
+*.min.js
+*.min.css
+
+# Testes
+__pycache__/
+*.pyc
+.pytest_cache/
+coverage/
+
+# Graphify específico
+graphify-out/cache/
+graphify-out/transcripts/

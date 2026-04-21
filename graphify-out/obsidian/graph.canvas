@@ -1,0 +1,452 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Knowledge Output",
+      "x": 0,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_continuous-documentation",
+      "type": "file",
+      "file": "graphify/obsidian/Continuous Documentation.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_graphify",
+      "type": "file",
+      "file": "graphify/obsidian/Graphify.md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_onboarding_obsidian",
+      "type": "file",
+      "file": "graphify/obsidian/Obsidian.md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_repository-pattern",
+      "type": "file",
+      "file": "graphify/obsidian/Repository Pattern.md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_wiki",
+      "type": "file",
+      "file": "graphify/obsidian/Wiki.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_onboarding_wiki",
+      "type": "file",
+      "file": "graphify/obsidian/Wiki_1.md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Maintenance Practices",
+      "x": 740,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_continuous-graph-maintenance_atomic-commits",
+      "type": "file",
+      "file": "graphify/obsidian/Atomic Commits.md",
+      "x": 760,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_cache-hit-rate",
+      "type": "file",
+      "file": "graphify/obsidian/Cache Hit Rate.md",
+      "x": 960,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_continuous-graph-maintenance",
+      "type": "file",
+      "file": "graphify/obsidian/Continuous Graph Maintenance.md",
+      "x": 1160,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_continuous-integration",
+      "type": "file",
+      "file": "graphify/obsidian/Continuous Integration.md",
+      "x": 760,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_git-hooks",
+      "type": "file",
+      "file": "graphify/obsidian/Git Hooks.md",
+      "x": 960,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_synchronization",
+      "type": "file",
+      "file": "graphify/obsidian/Synchronization.md",
+      "x": 1160,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Navigation & Discovery",
+      "x": 1480,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_onboarding_graph-report",
+      "type": "file",
+      "file": "graphify/obsidian/GRAPH_REPORT.md",
+      "x": 1500,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_onboarding_onboarding",
+      "type": "file",
+      "file": "graphify/obsidian/Onboarding.md",
+      "x": 1700,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_queries",
+      "type": "file",
+      "file": "graphify/obsidian/Queries.md",
+      "x": 1900,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_onboarding_queries",
+      "type": "file",
+      "file": "graphify/obsidian/Queries_1.md",
+      "x": 1500,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_onboarding_suggested-questions",
+      "type": "file",
+      "file": "graphify/obsidian/Suggested Questions.md",
+      "x": 1700,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_onboarding_surprising-connections",
+      "type": "file",
+      "file": "graphify/obsidian/Surprising Connections.md",
+      "x": 1900,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "Core Concepts",
+      "x": 0,
+      "y": 480,
+      "width": 660,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_communities",
+      "type": "file",
+      "file": "graphify/obsidian/Communities (Comunidades).md",
+      "x": 20,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_edges",
+      "type": "file",
+      "file": "graphify/obsidian/Edges (Arestas).md",
+      "x": 220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_god-nodes",
+      "type": "file",
+      "file": "graphify/obsidian/God Nodes (N\u00f3s de Deus).md",
+      "x": 420,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_knowledge-graph",
+      "type": "file",
+      "file": "graphify/obsidian/Knowledge Graph.md",
+      "x": 20,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify-as-knowledge-center_nodes",
+      "type": "file",
+      "file": "graphify/obsidian/Nodes (N\u00f3s).md",
+      "x": 220,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Technical Extraction",
+      "x": 740,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_continuous-graph-maintenance_ast-extraction",
+      "type": "file",
+      "file": "graphify/obsidian/AST Extraction.md",
+      "x": 760,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_incremental-updates",
+      "type": "file",
+      "file": "graphify/obsidian/Incremental Updates.md",
+      "x": 960,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_continuous-graph-maintenance_sha256-cache",
+      "type": "file",
+      "file": "graphify/obsidian/SHA256 Cache.md",
+      "x": 1160,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_graphify-as-knowledge-center_graphify_graphify-as-knowledge-center_knowledge-graph",
+      "fromNode": "n_graphify-as-knowledge-center_graphify",
+      "toNode": "n_graphify-as-knowledge-center_knowledge-graph",
+      "label": "is [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_graphify_graphify-as-knowledge-center_repository-pattern",
+      "fromNode": "n_graphify-as-knowledge-center_graphify",
+      "toNode": "n_graphify-as-knowledge-center_repository-pattern",
+      "label": "can_be_used_as [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_graphify_graphify-as-knowledge-center_queries",
+      "fromNode": "n_graphify-as-knowledge-center_graphify",
+      "toNode": "n_graphify-as-knowledge-center_queries",
+      "label": "use [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_graphify_graphify-as-knowledge-center_wiki",
+      "fromNode": "n_graphify-as-knowledge-center_graphify",
+      "toNode": "n_graphify-as-knowledge-center_wiki",
+      "label": "generates [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_graphify_continuous-graph-maintenance_continuous-graph-maintenance",
+      "fromNode": "n_graphify-as-knowledge-center_graphify",
+      "toNode": "n_continuous-graph-maintenance_continuous-graph-maintenance",
+      "label": "requires [INFERRED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_knowledge-graph_graphify-as-knowledge-center_nodes",
+      "fromNode": "n_graphify-as-knowledge-center_knowledge-graph",
+      "toNode": "n_graphify-as-knowledge-center_nodes",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_knowledge-graph_graphify-as-knowledge-center_edges",
+      "fromNode": "n_graphify-as-knowledge-center_knowledge-graph",
+      "toNode": "n_graphify-as-knowledge-center_edges",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_knowledge-graph_graphify-as-knowledge-center_communities",
+      "fromNode": "n_graphify-as-knowledge-center_knowledge-graph",
+      "toNode": "n_graphify-as-knowledge-center_communities",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_knowledge-graph_graphify-as-knowledge-center_god-nodes",
+      "fromNode": "n_graphify-as-knowledge-center_knowledge-graph",
+      "toNode": "n_graphify-as-knowledge-center_god-nodes",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_repository-pattern_graphify-as-knowledge-center_continuous-documentation",
+      "fromNode": "n_graphify-as-knowledge-center_repository-pattern",
+      "toNode": "n_graphify-as-knowledge-center_continuous-documentation",
+      "label": "facilitates [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_queries_onboarding_queries",
+      "fromNode": "n_graphify-as-knowledge-center_queries",
+      "toNode": "n_onboarding_queries",
+      "label": "same_concept_as [INFERRED]"
+    },
+    {
+      "id": "e_graphify-as-knowledge-center_wiki_onboarding_wiki",
+      "fromNode": "n_graphify-as-knowledge-center_wiki",
+      "toNode": "n_onboarding_wiki",
+      "label": "same_concept_as [INFERRED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_continuous-graph-maintenance_continuous-graph-maintenance_git-hooks",
+      "fromNode": "n_continuous-graph-maintenance_continuous-graph-maintenance",
+      "toNode": "n_continuous-graph-maintenance_git-hooks",
+      "label": "uses [EXTRACTED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_continuous-graph-maintenance_continuous-graph-maintenance_cache-hit-rate",
+      "fromNode": "n_continuous-graph-maintenance_continuous-graph-maintenance",
+      "toNode": "n_continuous-graph-maintenance_cache-hit-rate",
+      "label": "metric_of [EXTRACTED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_continuous-graph-maintenance_continuous-graph-maintenance_synchronization",
+      "fromNode": "n_continuous-graph-maintenance_continuous-graph-maintenance",
+      "toNode": "n_continuous-graph-maintenance_synchronization",
+      "label": "ensures [INFERRED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_git-hooks_continuous-graph-maintenance_atomic-commits",
+      "fromNode": "n_continuous-graph-maintenance_git-hooks",
+      "toNode": "n_continuous-graph-maintenance_atomic-commits",
+      "label": "facilitate [EXTRACTED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_git-hooks_continuous-graph-maintenance_continuous-integration",
+      "fromNode": "n_continuous-graph-maintenance_git-hooks",
+      "toNode": "n_continuous-graph-maintenance_continuous-integration",
+      "label": "is_form_of [EXTRACTED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_incremental-updates_continuous-graph-maintenance_sha256-cache",
+      "fromNode": "n_continuous-graph-maintenance_incremental-updates",
+      "toNode": "n_continuous-graph-maintenance_sha256-cache",
+      "label": "optimizes [EXTRACTED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_incremental-updates_continuous-graph-maintenance_ast-extraction",
+      "fromNode": "n_continuous-graph-maintenance_incremental-updates",
+      "toNode": "n_continuous-graph-maintenance_ast-extraction",
+      "label": "part_of [EXTRACTED]"
+    },
+    {
+      "id": "e_continuous-graph-maintenance_atomic-commits_continuous-graph-maintenance_continuous-integration",
+      "fromNode": "n_continuous-graph-maintenance_atomic-commits",
+      "toNode": "n_continuous-graph-maintenance_continuous-integration",
+      "label": "related_to [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_onboarding_onboarding_graph-report",
+      "fromNode": "n_onboarding_onboarding",
+      "toNode": "n_onboarding_graph-report",
+      "label": "starts_with [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_onboarding_onboarding_wiki",
+      "fromNode": "n_onboarding_onboarding",
+      "toNode": "n_onboarding_wiki",
+      "label": "navigate_through [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_onboarding_onboarding_queries",
+      "fromNode": "n_onboarding_onboarding",
+      "toNode": "n_onboarding_queries",
+      "label": "uses [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_graph-report_onboarding_surprising-connections",
+      "fromNode": "n_onboarding_graph-report",
+      "toNode": "n_onboarding_surprising-connections",
+      "label": "shows [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_graph-report_onboarding_suggested-questions",
+      "fromNode": "n_onboarding_graph-report",
+      "toNode": "n_onboarding_suggested-questions",
+      "label": "shows [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_graph-report_onboarding_queries",
+      "fromNode": "n_onboarding_graph-report",
+      "toNode": "n_onboarding_queries",
+      "label": "query [EXTRACTED]"
+    },
+    {
+      "id": "e_onboarding_wiki_onboarding_obsidian",
+      "fromNode": "n_onboarding_wiki",
+      "toNode": "n_onboarding_obsidian",
+      "label": "integrates_with [EXTRACTED]"
+    }
+  ]
+}

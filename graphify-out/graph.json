@@ -1,0 +1,568 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "Graphify",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_graphify",
+      "community": 0,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "Knowledge Graph",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_knowledge-graph",
+      "community": 3,
+      "norm_label": "knowledge graph"
+    },
+    {
+      "label": "Nodes (N\u00f3s)",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_nodes",
+      "community": 3,
+      "norm_label": "nodes (nos)"
+    },
+    {
+      "label": "Edges (Arestas)",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_edges",
+      "community": 3,
+      "norm_label": "edges (arestas)"
+    },
+    {
+      "label": "Communities (Comunidades)",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_communities",
+      "community": 3,
+      "norm_label": "communities (comunidades)"
+    },
+    {
+      "label": "God Nodes (N\u00f3s de Deus)",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_god-nodes",
+      "community": 3,
+      "norm_label": "god nodes (nos de deus)"
+    },
+    {
+      "label": "Repository Pattern",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_repository-pattern",
+      "community": 0,
+      "norm_label": "repository pattern"
+    },
+    {
+      "label": "Continuous Documentation",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_continuous-documentation",
+      "community": 0,
+      "norm_label": "continuous documentation"
+    },
+    {
+      "label": "Queries",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_queries",
+      "community": 2,
+      "norm_label": "queries"
+    },
+    {
+      "label": "Wiki",
+      "file_type": "document",
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "id": "graphify-as-knowledge-center_wiki",
+      "community": 0,
+      "norm_label": "wiki"
+    },
+    {
+      "label": "Continuous Graph Maintenance",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "community": 1,
+      "norm_label": "continuous graph maintenance"
+    },
+    {
+      "label": "Git Hooks",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_git-hooks",
+      "community": 1,
+      "norm_label": "git hooks"
+    },
+    {
+      "label": "Incremental Updates",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_incremental-updates",
+      "community": 4,
+      "norm_label": "incremental updates"
+    },
+    {
+      "label": "AST Extraction",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_ast-extraction",
+      "community": 4,
+      "norm_label": "ast extraction"
+    },
+    {
+      "label": "SHA256 Cache",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_sha256-cache",
+      "community": 4,
+      "norm_label": "sha256 cache"
+    },
+    {
+      "label": "Atomic Commits",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_atomic-commits",
+      "community": 1,
+      "norm_label": "atomic commits"
+    },
+    {
+      "label": "Continuous Integration",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_continuous-integration",
+      "community": 1,
+      "norm_label": "continuous integration"
+    },
+    {
+      "label": "Cache Hit Rate",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_cache-hit-rate",
+      "community": 1,
+      "norm_label": "cache hit rate"
+    },
+    {
+      "label": "Synchronization",
+      "file_type": "document",
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "id": "continuous-graph-maintenance_synchronization",
+      "community": 1,
+      "norm_label": "synchronization"
+    },
+    {
+      "label": "Onboarding",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_onboarding",
+      "community": 2,
+      "norm_label": "onboarding"
+    },
+    {
+      "label": "GRAPH_REPORT.md",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_graph-report",
+      "community": 2,
+      "norm_label": "graph_report.md"
+    },
+    {
+      "label": "Wiki",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_wiki",
+      "community": 0,
+      "norm_label": "wiki"
+    },
+    {
+      "label": "Queries",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_queries",
+      "community": 2,
+      "norm_label": "queries"
+    },
+    {
+      "label": "Obsidian",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_obsidian",
+      "community": 0,
+      "norm_label": "obsidian"
+    },
+    {
+      "label": "Surprising Connections",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_surprising-connections",
+      "community": 2,
+      "norm_label": "surprising connections"
+    },
+    {
+      "label": "Suggested Questions",
+      "file_type": "document",
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "id": "onboarding_suggested-questions",
+      "community": 2,
+      "norm_label": "suggested questions"
+    }
+  ],
+  "links": [
+    {
+      "relation": "is",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_graphify",
+      "_tgt": "graphify-as-knowledge-center_knowledge-graph",
+      "source": "graphify-as-knowledge-center_graphify",
+      "target": "graphify-as-knowledge-center_knowledge-graph"
+    },
+    {
+      "relation": "can_be_used_as",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_graphify",
+      "_tgt": "graphify-as-knowledge-center_repository-pattern",
+      "source": "graphify-as-knowledge-center_graphify",
+      "target": "graphify-as-knowledge-center_repository-pattern"
+    },
+    {
+      "relation": "use",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_queries",
+      "_tgt": "graphify-as-knowledge-center_graphify",
+      "source": "graphify-as-knowledge-center_graphify",
+      "target": "graphify-as-knowledge-center_queries"
+    },
+    {
+      "relation": "generates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_graphify",
+      "_tgt": "graphify-as-knowledge-center_wiki",
+      "source": "graphify-as-knowledge-center_graphify",
+      "target": "graphify-as-knowledge-center_wiki"
+    },
+    {
+      "relation": "requires",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "inferred",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_graphify",
+      "_tgt": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "source": "graphify-as-knowledge-center_graphify",
+      "target": "continuous-graph-maintenance_continuous-graph-maintenance"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_knowledge-graph",
+      "_tgt": "graphify-as-knowledge-center_nodes",
+      "source": "graphify-as-knowledge-center_knowledge-graph",
+      "target": "graphify-as-knowledge-center_nodes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_knowledge-graph",
+      "_tgt": "graphify-as-knowledge-center_edges",
+      "source": "graphify-as-knowledge-center_knowledge-graph",
+      "target": "graphify-as-knowledge-center_edges"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_knowledge-graph",
+      "_tgt": "graphify-as-knowledge-center_communities",
+      "source": "graphify-as-knowledge-center_knowledge-graph",
+      "target": "graphify-as-knowledge-center_communities"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_knowledge-graph",
+      "_tgt": "graphify-as-knowledge-center_god-nodes",
+      "source": "graphify-as-knowledge-center_knowledge-graph",
+      "target": "graphify-as-knowledge-center_god-nodes"
+    },
+    {
+      "relation": "facilitates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/patterns/graphify-as-knowledge-center.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_repository-pattern",
+      "_tgt": "graphify-as-knowledge-center_continuous-documentation",
+      "source": "graphify-as-knowledge-center_repository-pattern",
+      "target": "graphify-as-knowledge-center_continuous-documentation"
+    },
+    {
+      "relation": "same_concept_as",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "inferred",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_queries",
+      "_tgt": "onboarding_queries",
+      "source": "graphify-as-knowledge-center_queries",
+      "target": "onboarding_queries"
+    },
+    {
+      "relation": "same_concept_as",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "inferred",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "graphify-as-knowledge-center_wiki",
+      "_tgt": "onboarding_wiki",
+      "source": "graphify-as-knowledge-center_wiki",
+      "target": "onboarding_wiki"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "_tgt": "continuous-graph-maintenance_git-hooks",
+      "source": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "target": "continuous-graph-maintenance_git-hooks"
+    },
+    {
+      "relation": "metric_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_cache-hit-rate",
+      "_tgt": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "source": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "target": "continuous-graph-maintenance_cache-hit-rate"
+    },
+    {
+      "relation": "ensures",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "inferred",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "_tgt": "continuous-graph-maintenance_synchronization",
+      "source": "continuous-graph-maintenance_continuous-graph-maintenance",
+      "target": "continuous-graph-maintenance_synchronization"
+    },
+    {
+      "relation": "facilitate",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_git-hooks",
+      "_tgt": "continuous-graph-maintenance_atomic-commits",
+      "source": "continuous-graph-maintenance_git-hooks",
+      "target": "continuous-graph-maintenance_atomic-commits"
+    },
+    {
+      "relation": "is_form_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_continuous-integration",
+      "_tgt": "continuous-graph-maintenance_git-hooks",
+      "source": "continuous-graph-maintenance_git-hooks",
+      "target": "continuous-graph-maintenance_continuous-integration"
+    },
+    {
+      "relation": "optimizes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_sha256-cache",
+      "_tgt": "continuous-graph-maintenance_incremental-updates",
+      "source": "continuous-graph-maintenance_incremental-updates",
+      "target": "continuous-graph-maintenance_sha256-cache"
+    },
+    {
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_ast-extraction",
+      "_tgt": "continuous-graph-maintenance_incremental-updates",
+      "source": "continuous-graph-maintenance_incremental-updates",
+      "target": "continuous-graph-maintenance_ast-extraction"
+    },
+    {
+      "relation": "related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/practices/continuous-graph-maintenance.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "continuous-graph-maintenance_atomic-commits",
+      "_tgt": "continuous-graph-maintenance_continuous-integration",
+      "source": "continuous-graph-maintenance_atomic-commits",
+      "target": "continuous-graph-maintenance_continuous-integration"
+    },
+    {
+      "relation": "starts_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_onboarding",
+      "_tgt": "onboarding_graph-report",
+      "source": "onboarding_onboarding",
+      "target": "onboarding_graph-report"
+    },
+    {
+      "relation": "navigate_through",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_onboarding",
+      "_tgt": "onboarding_wiki",
+      "source": "onboarding_onboarding",
+      "target": "onboarding_wiki"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_onboarding",
+      "_tgt": "onboarding_queries",
+      "source": "onboarding_onboarding",
+      "target": "onboarding_queries"
+    },
+    {
+      "relation": "shows",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_graph-report",
+      "_tgt": "onboarding_surprising-connections",
+      "source": "onboarding_graph-report",
+      "target": "onboarding_surprising-connections"
+    },
+    {
+      "relation": "shows",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_graph-report",
+      "_tgt": "onboarding_suggested-questions",
+      "source": "onboarding_graph-report",
+      "target": "onboarding_suggested-questions"
+    },
+    {
+      "relation": "query",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_queries",
+      "_tgt": "onboarding_graph-report",
+      "source": "onboarding_graph-report",
+      "target": "onboarding_queries"
+    },
+    {
+      "relation": "integrates_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/tutorials/onboarding.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "onboarding_obsidian",
+      "_tgt": "onboarding_wiki",
+      "source": "onboarding_wiki",
+      "target": "onboarding_obsidian"
+    }
+  ],
+  "hyperedges": []
+}
